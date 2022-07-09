@@ -1,16 +1,23 @@
-Подключение
+# Содержание
+[Подключение](#Подключение)  
+[Создание модели](#Создание)  
+[Стандартный запрос](#Стандартный)  
+[Условия select](#Условия)  
+[Группировка, количество результатов](#Группировка)
 
+# Подключение
+```
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize("db_name", "db_user", "password", {
   dialect: "postgres",
   host: "localhost",
   define: {
-    freezeTableName: true //чтобы название таблицы было как у модели, не в                           //множественном числе
+    freezeTableName: true //чтобы название таблицы было как у модели, не в множественном числе
   },
 });
-----------------------------------------------------------------------
-Создание модели
+```
+# Создание модели
 
 const modelName = sequelize.define("tableName", 
 	{
@@ -25,9 +32,9 @@ const modelName = sequelize.define("tableName",
 
 modelName.hasMany(modelName, { sourceKey: "column", foreignKey: "column" });
 modelName.belongsTo(modelName, { targetKey: 'column', foreignKey: 'column' });
-----------------------------------------------------------------------
-Запрос
 
+# Стандартный запрос
+```
 Product.findAll({
 	attributes: [Sequelize.fn('DISTINCT', Sequelize.col('table.column')) ,'column'], //attributes - какое нужно поле
 	raw: true,             //без дополнительных данных
@@ -45,9 +52,9 @@ Product.findAll({
 })
 
 sequelize.literal(`(SELECT MAX(price) FROM printer)`) //можно вставить в attributes или where
---------------------------------------------------------------------------
-Запросы
-
+```
+# Условия select
+```
 Post.findAll({
   where: {
     [Op.and]: [{ a: 5 }, { b: 6 }],            // (a = 5) AND (b = 6)
@@ -99,15 +106,14 @@ Post.findAll({
     }
   }
 });
+```
+# Группировка, количество результатов
 
-Project.findAll({ group: 'name' });
-// yields 'GROUP BY name'
+Project.findAll({ group: 'name' }); // yields 'GROUP BY name'
 
-// Fetch 10 instances/rows
-Project.findAll({ limit: 10 });
+Project.findAll({ limit: 10 }); // Fetch 10 instances/rows
 
-// Skip 8 instances/rows
-Project.findAll({ offset: 8 });
+Project.findAll({ offset: 8 }); // Skip 8 instances/rows
 
-// Skip 5 instances and fetch the 5 after that
-Project.findAll({ offset: 5, limit: 5 });
+Project.findAll({ offset: 5, limit: 5 }); // Skip 5 instances and fetch the 5 after that
+```
