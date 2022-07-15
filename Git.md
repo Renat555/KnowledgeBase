@@ -1,7 +1,7 @@
 ## Содержание
-[Настройка](#Настройка)
+[Основы](#Основы)
 
-## Настройка
+## Основы
 
 ### Первоночальная настройка
 
@@ -23,13 +23,13 @@ git clone https://github.com/address
 Отслеживание изменений  
 git add filename
 
-Оменить изменения до staged  
+Оменить изменения сделанные до staged  
 git restore
 
 Добавить в staged  
 git add filename
 
-Удалить файл из отслеживания  
+Удалить файл и перестать отслеживать  
 git rm
 
 Игнорировать файлы  
@@ -46,3 +46,13 @@ ignore doc/notes.txt, but not doc/server/arch.txt
 `doc/*.txt`  
 ignore all .pdf files in the doc/ directory and any of its subdirectories  
 `doc/**/*.pdf`  
+
+Посмотреть статус  
+git status
+
+### История коммитов
+git log
+
+### Отмена изменений
+Изменить комментарий к последнему коммиту и добавить в него новые изменения. Например если сделал коммит, и понял что нужно добавить что-то еще в него же.
+git commit --amend
